@@ -29,6 +29,7 @@ public class Main {
     public static void mostrarMenu() {
         out.println("+=======================+");
         out.println("|  1. Registrar cuenta  |");
+        out.println("|  2. Depositar         |");
         out.println("+=======================+");
         out.println();
     }
@@ -56,6 +57,7 @@ public class Main {
                 break;
 
             case "2":
+                
                 break;
 
             case "3":
@@ -102,6 +104,7 @@ public class Main {
                 break;
                
             case "CP":
+                registrarCuentaProgramada();
                 break;
 
             default:
@@ -164,6 +167,18 @@ public class Main {
            out.println("No se pudo hace la cuenta de ahorro porque la cuenta ingresada no existe");
        }
    }
+    
+    public void depositar() throws IOException {
+       String numero = "";
+       double saldo = 0.0;
+        
+       out.print("Ingrese su número de cuenta: ");
+       numero = in.readLine();
+       out.print("Ingrese el monto a depositar: ");
+       saldo = Double.parseDouble(in.readLine());
+       
+       control.enviarDeposito(numero, saldo);
+    }
 
     public static void listarMateriales() {
 //        String[] lista = control.listaMateriales();
