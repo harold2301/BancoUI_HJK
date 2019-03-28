@@ -1,6 +1,7 @@
 package userinterface;
 
 import java.io.*;
+import java.util.Scanner;
 import transferlayer.Controller;
 
 public class Main { 
@@ -8,7 +9,7 @@ public class Main {
     static BufferedReader in = new BufferedReader(
             new InputStreamReader(System.in));
     static PrintStream out = (System.out);
-
+    static Scanner sc = new Scanner (System.in);
     public static Controller control = new Controller();
     
     public static void main(String args[]) throws IOException {
@@ -85,6 +86,7 @@ public class Main {
         
         switch (tipoUsuario) {
             case "CC":
+                
                 break;
                 
             case "CA":
@@ -100,7 +102,16 @@ public class Main {
         }
     };
     
-   
+   public static void registrarCuentaCorriene (){
+       
+       String numeroCuenta = "";
+       double saldoInicial = 0.0;
+       
+       System.out.println("Ingrese el número de su cuenta corriente: ");
+       numeroCuenta = sc.next();
+       System.out.println("Ingrese el saldo inicial de la cuenta corriente: ");
+       saldoInicial = sc.nextDouble();
+   }
     
     public static void listarMateriales() {
 //        String[] lista = control.listaMateriales();
