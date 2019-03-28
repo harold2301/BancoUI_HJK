@@ -4,14 +4,14 @@ import java.io.*;
 import java.util.Scanner;
 import transferlayer.Controller;
 
-public class Main { 
+public class Main {
 
     static BufferedReader in = new BufferedReader(
             new InputStreamReader(System.in));
     static PrintStream out = (System.out);
-    static Scanner sc = new Scanner (System.in);
+    static Scanner sc = new Scanner(System.in);
     public static Controller control = new Controller();
-    
+
     public static void main(String args[]) throws IOException {
         String opc = "";
         boolean noSalir = true;
@@ -22,14 +22,18 @@ public class Main {
             noSalir = ejecutarAccion(opc);
         } while (noSalir);
 
-    };
+    }
+
+    ;
 
     public static void mostrarMenu() {
         out.println("+=======================+");
         out.println("|  1. Registrar cuenta  |");
         out.println("+=======================+");
         out.println();
-    };
+    }
+
+    ;
 
     public static String leerOpcion() throws IOException {
         String opcion = "";
@@ -39,7 +43,9 @@ public class Main {
         out.println();
 
         return opcion;
-    };
+    }
+
+    ;
 
     public static boolean ejecutarAccion(String popc) throws IOException {
         boolean noSalir = true;
@@ -51,18 +57,18 @@ public class Main {
 
             case "2":
                 break;
-                
+
             case "3":
                 break;
-                
+
             case "4":
                 break;
-                
+
             case "5":
                 out.println("Hasta luego...");
                 noSalir = false;
                 break;
-                
+
             case "6":
                 break;
 
@@ -73,51 +79,80 @@ public class Main {
         }
 
         return noSalir;
-    };
+    }
+
+    ;
     
-    public static void registrarCuenta()throws IOException {
+    public static void registrarCuenta() throws IOException {
         String tipoUsuario = "";
-        
+
         out.println("Cuenta corriente  |  Cuenta de ahorro  |  Cuenta de ahorro programada");
         out.println("       CC         |         CA         |               CP");
         out.print("\nSeleccione un tipo de cuenta: ");
         tipoUsuario = in.readLine();
         out.println();
-        
+
         switch (tipoUsuario) {
             case "CC":
-                
+                registrarCuentaCorriente();
                 break;
-                
+
             case "CA":
+                registrarCuentaAhorro();
                 break;
-                
+               
             case "CP":
                 break;
-            
+
             default:
                 out.println("opción inválida");
                 out.println();
                 break;
         }
-    };
+    }
     
-   public static void registrarCuentaCorriene (){
-       
-       String numeroCuenta = "";
-       double saldoInicial = 0.0;
-       
-       System.out.println("Ingrese el número de su cuenta corriente: ");
-       numeroCuenta = sc.next();
-       System.out.println("Ingrese el saldo inicial de la cuenta corriente: ");
-       saldoInicial = sc.nextDouble();
-   }
-    
+   public static void registrarCuentaCorriente() {
+
+        String numeroCuenta;
+        double saldoInicial;
+
+        System.out.println("Ingrese el número de su cuenta corriente: ");
+        numeroCuenta = sc.next();
+        System.out.println("Ingrese el saldo inicial de la cuenta corriente: ");
+        saldoInicial = sc.nextDouble();
+        int valida = control.enviarCuentaCorriente(numeroCuenta, saldoInicial);
+        if (valida == -1) {
+            System.out.println("Su cuenta se registró exitosamente");
+        } else {
+            System.out.println("Ya existe una cuenta con ese número de cuenta"
+                    + " , favor ingrese otro número de cuenta");
+        }
+    }
+
+    public static void registrarCuentaAhorro() {
+
+        String numeroCuenta;
+        double saldoInicial;
+
+        System.out.println("Ingrese el número de su cuenta ahorro: ");
+        numeroCuenta = sc.next();
+        System.out.println("Ingrese el saldo inicial de la cuenta ahorro: ");
+        saldoInicial = sc.nextDouble();
+        int valida = control.enviarCuentaAhorro(numeroCuenta, saldoInicial);
+        if (valida == -1) {
+            System.out.println("Su cuenta se registró exitosamente");
+        } else {
+            System.out.println("Ya existe una cuenta con ese número de cuenta"
+                    + " , favor ingrese otro número de cuenta");
+        }
+    }
+
     public static void listarMateriales() {
 //        String[] lista = control.listaMateriales();
 //        
 //        for (String info : lista) {
 //            out.println(info);
 //        }
-    };
+    }
+;
 }
