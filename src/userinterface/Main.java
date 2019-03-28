@@ -146,6 +146,24 @@ public class Main {
                     + " , favor ingrese otro número de cuenta");
         }
     }
+    
+    public static void registrarCuentaProgramada() throws IOException {
+       String numero = "";
+       double saldo = 0.0;
+       
+       System.out.print("Ingrese el número de su cuenta corriente: ");
+       numero = in.readLine();
+       System.out.print("Ingrese el monto que quiere ahorrar mensualmente: ");
+       saldo = Double.parseDouble(in.readLine());
+       
+       int registrado = control.enviarCuenta(numero, saldo);
+       
+       if (registrado != -1) {
+           out.println("La cuenta de ahorro se registró correctamente");
+       } else {
+           out.println("No se pudo hace la cuenta de ahorro porque la cuenta ingresada no existe");
+       }
+   }
 
     public static void listarMateriales() {
 //        String[] lista = control.listaMateriales();
