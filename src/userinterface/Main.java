@@ -1,6 +1,8 @@
 package userinterface;
 
+import baselayer.Cuenta;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import transferlayer.Controller;
 
@@ -54,8 +56,9 @@ public class Main {
             case "1":
                 registrarCuenta();
                 break;
-
+                
             case "2":
+                registrarCliente();
                 break;
 
             case "3":
@@ -86,8 +89,8 @@ public class Main {
     public static void registrarCuenta() throws IOException {
         String tipoUsuario = "";
 
-        out.println("Cuenta corriente  |  Cuenta de ahorro  |  Cuenta de ahorro programada");
-        out.println("       CC         |         CA         |               CP");
+        out.println("Cuenta corriente  |  Cuenta de ahorro  |  Cuenta de ahorro programada  |       Cliente    ");
+        out.println("       CC         |         CA         |               CP              |          C       ");
         out.print("\nSeleccione un tipo de cuenta: ");
         tipoUsuario = in.readLine();
         out.println();
@@ -100,8 +103,13 @@ public class Main {
             case "CA":
                 registrarCuentaAhorro();
                 break;
-               
+
             case "CP":
+                registrarCuentaProgramada();
+                break;
+
+            case "C":
+                registrarCliente();
                 break;
 
             default:
@@ -110,8 +118,45 @@ public class Main {
                 break;
         }
     }
-    
-   public static void registrarCuentaCorriente() {
+
+    public static void registrarCliente() {
+        String nombre;
+        String cedula;
+        String direccion;
+        String numero;
+        ArrayList<String> numeros = new ArrayList();
+        boolean noSalir = true;
+
+        System.out.println("Ingrese el nombre del cliente");
+        nombre = sc.next();
+        System.out.println("Ingrese la cédula del cliente");
+        cedula = sc.next();
+        System.out.println("Ingrese la direccion del cliente");
+        direccion = sc.next();
+        System.out.println("Ingrese los numero(s) de cuenta(s) del cliente");
+        do {
+            System.out.println("¿Desea agregar una nueva cuenta?");
+            System.out.println(" 1. Si    |    2. No  ");
+            int op = sc.nextInt();
+            if (op == 1) {
+                System.out.println("Ingrese el numero de cuenta que sea agregarle al"
+                        + " cliente");
+                numero = sc.next();
+            } else {
+                noSalir = false;
+            }
+        } while (noSalir);
+
+        int valida = control.enviarCliente(nombre, cedula, direccion);
+        if (valida == -1) {
+            System.out.println("Su cliente se registró exitosamente");
+        } else {
+            System.out.println("Ya existe un cliente con ese número de cedula"
+                    + " , favor ingrese otro número de cedula");
+        }
+    }
+
+    public static void registrarCuentaCorriente() {
 
         String numeroCuenta;
         double saldoInicial;
@@ -146,24 +191,37 @@ public class Main {
                     + " , favor ingrese otro número de cuenta");
         }
     }
-    
+
     public static void registrarCuentaProgramada() throws IOException {
-       String numero = "";
-       double saldo = 0.0;
-       
-       System.out.print("Ingrese el número de su cuenta corriente: ");
-       numero = in.readLine();
-       System.out.print("Ingrese el monto que quiere ahorrar mensualmente: ");
-       saldo = Double.parseDouble(in.readLine());
-       
-       int registrado = control.enviarCuenta(numero, saldo);
-       
-       if (registrado != -1) {
-           out.println("La cuenta de ahorro se registró correctamente");
-       } else {
-           out.println("No se pudo hace la cuenta de ahorro porque la cuenta ingresada no existe");
-       }
-   }
+        String numero;
+        double saldo;
+
+        System.out.print("Ingrese el número de su cuenta corriente: ");
+        numero = in.readLine();
+        System.out.print("Ingrese el monto que quiere ahorrar mensualmente: ");
+        saldo = Double.parseDouble(in.readLine());
+
+        int registrado = control.enviarCuenta(numero, saldo);
+
+        if (registrado != -1) {
+            out.println("La cuenta de ahorro se registró correctamente");
+        } else {
+            out.println("Ya existe una cuenta con ese número de cuenta"
+                    + " , favor ingrese otro número de cuenta");
+        }
+    }
+
+    public static void asignarCuenta() {
+        String cedula;
+        String numeroCuenta;
+
+        System.out.println("Ingrese la cedula del cliente al cual desea"
+                + " asignarle una cuenta");
+        cedula = sc.next();
+        System.out.println("Ingrese el numero de cuenta que desea asignarle"
+                + " a dicho cliente");
+
+    }
 
     public static void listarMateriales() {
 //        String[] lista = control.listaMateriales();
