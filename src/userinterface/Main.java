@@ -26,16 +26,13 @@ public class Main {
 
     }
 
-    ;
-
     public static void mostrarMenu() {
         out.println("+=======================+");
         out.println("|  1. Registrar cuenta  |");
+        out.println("|  2. Depositar         |");
         out.println("+=======================+");
         out.println();
     }
-
-    ;
 
     public static String leerOpcion() throws IOException {
         String opcion = "";
@@ -47,8 +44,6 @@ public class Main {
         return opcion;
     }
 
-    ;
-
     public static boolean ejecutarAccion(String popc) throws IOException {
         boolean noSalir = true;
 
@@ -58,7 +53,11 @@ public class Main {
                 break;
                 
             case "2":
+<<<<<<< HEAD
                 registrarCliente();
+=======
+                
+>>>>>>> 047262cdc449f820d8bfadaeb9a0a1b42a28b057
                 break;
 
             case "3":
@@ -83,8 +82,6 @@ public class Main {
 
         return noSalir;
     }
-
-    ;
     
     public static void registrarCuenta() throws IOException {
         String tipoUsuario = "";
@@ -106,10 +103,13 @@ public class Main {
 
             case "CP":
                 registrarCuentaProgramada();
+<<<<<<< HEAD
                 break;
 
             case "C":
                 registrarCliente();
+=======
+>>>>>>> 047262cdc449f820d8bfadaeb9a0a1b42a28b057
                 break;
 
             default:
@@ -170,7 +170,7 @@ public class Main {
             System.out.println("Su cuenta se registró exitosamente");
         } else {
             System.out.println("Ya existe una cuenta con ese número de cuenta"
-                    + " , favor ingrese otro número de cuenta");
+                    + ", favor ingrese otro número de cuenta");
         }
     }
 
@@ -193,6 +193,7 @@ public class Main {
     }
 
     public static void registrarCuentaProgramada() throws IOException {
+<<<<<<< HEAD
         String numero;
         double saldo;
 
@@ -221,6 +222,35 @@ public class Main {
         System.out.println("Ingrese el numero de cuenta que desea asignarle"
                 + " a dicho cliente");
 
+=======
+       String numero = "";
+       double saldo = 0.0;
+       
+       System.out.print("Ingrese el número de su cuenta corriente: ");
+       numero = in.readLine();
+       System.out.print("Ingrese el monto que quiere ahorrar mensualmente: ");
+       saldo = Double.parseDouble(in.readLine());
+       
+       int registrado = control.enviarCuenta(numero, saldo);
+       
+       if (registrado != -1) {
+           out.println("La cuenta de ahorro se registró correctamente");
+       } else {
+           out.println("No se pudo hace la cuenta de ahorro porque la cuenta ingresada no existe");
+       }
+   }
+    
+    public void depositar() throws IOException {
+       String numero = "";
+       double saldo = 0.0;
+        
+       out.print("Ingrese su número de cuenta: ");
+       numero = in.readLine();
+       out.print("Ingrese el monto a depositar: ");
+       saldo = Double.parseDouble(in.readLine());
+       
+       control.enviarDeposito(numero, saldo);
+>>>>>>> 047262cdc449f820d8bfadaeb9a0a1b42a28b057
     }
 
     public static void listarMateriales() {
