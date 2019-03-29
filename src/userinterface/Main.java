@@ -24,8 +24,6 @@ public class Main {
 
     }
 
-    ;
-
     public static void mostrarMenu() {
         out.println("+=======================+");
         out.println("|  1. Registrar cuenta  |");
@@ -33,8 +31,6 @@ public class Main {
         out.println("+=======================+");
         out.println();
     }
-
-    ;
 
     public static String leerOpcion() throws IOException {
         String opcion = "";
@@ -45,8 +41,6 @@ public class Main {
 
         return opcion;
     }
-
-    ;
 
     public static boolean ejecutarAccion(String popc) throws IOException {
         boolean noSalir = true;
@@ -82,8 +76,6 @@ public class Main {
 
         return noSalir;
     }
-
-    ;
     
     public static void registrarCuenta() throws IOException {
         String tipoUsuario = "";
@@ -128,7 +120,7 @@ public class Main {
             System.out.println("Su cuenta se registró exitosamente");
         } else {
             System.out.println("Ya existe una cuenta con ese número de cuenta"
-                    + " , favor ingrese otro número de cuenta");
+                    + ", favor ingrese otro número de cuenta");
         }
     }
 
