@@ -129,9 +129,9 @@ public class Main {
         String numeroCuenta;
         double saldoInicial;
 
-        System.out.println("Ingrese el número de su cuenta ahorro: ");
+        System.out.println("Ingrese el número de su cuenta de ahorro: ");
         numeroCuenta = sc.next();
-        System.out.println("Ingrese el saldo inicial de la cuenta ahorro: ");
+        System.out.println("Ingrese el saldo inicial de la cuenta de ahorro: ");
         saldoInicial = sc.nextDouble();
         int valida = control.enviarCuentaAhorro(numeroCuenta, saldoInicial);
         if (valida == -1) {
@@ -143,15 +143,18 @@ public class Main {
     }
     
     public static void registrarCuentaProgramada() throws IOException {
+       String identificacion = "";
        String numero = "";
-       double saldo = 0.0;
+       double monto = 0.0;
        
+       System.out.print("Ingrese su identificación: ");
+       identificacion = in.readLine();
        System.out.print("Ingrese el número de su cuenta corriente: ");
        numero = in.readLine();
        System.out.print("Ingrese el monto que quiere ahorrar mensualmente: ");
-       saldo = Double.parseDouble(in.readLine());
+       monto = Double.parseDouble(in.readLine());
        
-       int registrado = control.enviarCuenta(numero, saldo);
+       int registrado = control.enviarCuentaProgramada(identificacion, numero, monto);
        
        if (registrado != -1) {
            out.println("La cuenta de ahorro se registró correctamente");
@@ -164,7 +167,7 @@ public class Main {
        String numero = "";
        double saldo = 0.0;
         
-       out.print("Ingrese su número de cuenta: ");
+       out.print("Ingrese el número de cuenta: ");
        numero = in.readLine();
        out.print("Ingrese el monto a depositar: ");
        saldo = Double.parseDouble(in.readLine());
