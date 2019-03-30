@@ -58,7 +58,7 @@ public class Main {
                 break;
                 
             case "2":
-//                registrarCliente();
+                registrarCliente();
                 break;
 
             case "3":
@@ -131,23 +131,21 @@ public class Main {
         System.out.println("      Registro de la cuenta del cliente     ");
         System.out.println("|  CC. Cuenta Corriente  |  CA. Cuenta de ahorro  |");
         System.out.println();
+        tipo = sc.next();
         System.out.println("Ingrese el número de cuenta");
         numeroCuenta = sc.next();
 
         System.out.println("Ingrese el saldo inicial de la cuenta");
         saldoInicial = sc.nextDouble();
 
-        System.out.println("¿Qué tipo de cuenta desea registrar a la cuenta");
-        tipo = sc.next();
-
-        if (null == tipo) {
+        if (tipo == null) {
             System.out.println("Opción invalida");
         } else switch (tipo) {
             case "CC":
-                validar = control.enviarClienteCorriente(nombre, tipo, direccion, numeroCuenta, saldoInicial);
+                validar = control.enviarClienteCorriente(nombre, cedula, direccion, numeroCuenta, saldoInicial);
                 break;
             case "CA":
-                validar = control.enviarClienteAhorro(nombre, tipo, direccion, numeroCuenta, saldoInicial);
+                validar = control.enviarClienteAhorro(nombre, cedula, direccion, numeroCuenta, saldoInicial);
                 break;
             default:
                 System.out.println("Opción invalida");
