@@ -143,7 +143,7 @@ public class Main {
             encontrado = control.buscarCliente(cedula);
 
             if (encontrado != -1) {
-                out.println("Ese cliente ya está registrado  |  ¿Desea continuar con el registro? s/n");
+                out.print("\nEse cliente ya está registrado  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
                 out.println();
             }
@@ -161,18 +161,19 @@ public class Main {
 
             System.out.println("\n      Registro de la cuenta del cliente     ");
             System.out.println("|  CC. Cuenta Corriente  |  CA. Cuenta de ahorro  |");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("\nSeleccione una opción: ");
             tipo = sc.next();
-            System.out.println("Ingrese el número de cuenta");
+            System.out.println();
+            System.out.print("Ingrese el número de cuenta: ");
             numeroCuenta = sc.next();
 
-            System.out.println("Ingrese el saldo inicial de la cuenta");
+            System.out.print("Ingrese el saldo inicial de la cuenta: ");
             saldoInicial = sc.nextDouble();
 
             encontrado = control.buscarCuenta(numeroCuenta);
 
             if (encontrado != -1) {
-                out.println("\nEsa cuenta ya está registrada  |  ¿Desea continuar con el registro? s/n");
+                out.print("\nEsa cuenta ya está registrada  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
                 out.println();
             }
@@ -235,8 +236,10 @@ public class Main {
             numeroCuenta = sc.next();
             System.out.print("Ingrese el saldo inicial de la nueva cuenta: ");
             saldoInicial = sc.nextDouble();
+            
+            encontrado = control.buscarCuenta(numeroCuenta);
 
-            if (encontrado == -1) {
+            if (encontrado != -1) {
                 out.println("Esa cuenta ya existe  |  ¿Desea continuar con el registro? s/n");
                 continuar = in.readLine();
             }
@@ -284,16 +287,20 @@ public class Main {
         continuar = "";
 
         do {
+            
             System.out.print("Ingrese el número de la nueva cuenta de ahorro: ");
             numeroCuenta = sc.next();
             System.out.print("Ingrese el saldo inicial de la nueva cuenta de ahorra: ");
             saldoInicial = sc.nextDouble();
+            
+            encontrado = control.buscarCuenta(numeroCuenta);
 
-            if (encontrado == -1) {
+            if (encontrado != -1) {
                 out.println("Esa cuenta ya existe  |  ¿Desea continuar con el registro? s/n");
                 continuar = in.readLine();
             }
-        } while (encontrado == -1 && continuar.equals("s"));
+            
+        } while (encontrado != -1 && continuar.equals("s"));
 
         if (continuar.equals("n")) {
             return;
@@ -368,12 +375,12 @@ public class Main {
 
             encontrado = control.buscarCuenta(numeroCuenta);
             
-            if (encontrado == -1) {
+            if (encontrado != -1) {
                 out.println("Esa cuenta ya existe  |  ¿Desea continuar con el registro? s/n");
                 continuar = in.readLine();
             }
             
-        } while (encontrado == -1 && continuar.equals("s"));
+        } while (encontrado != -1 && continuar.equals("s"));
 
         if (continuar.equals("n")) {
             return;
