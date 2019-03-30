@@ -219,8 +219,9 @@ public class Main {
             encontrado = control.buscarCliente(identificacion);
 
             if (encontrado == -1) {
-                out.println("Ese cliente no está registrado  |  ¿Desea continuar con el registro? s/n");
+                out.print("\nEse cliente no está registrado  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
+                out.println();
             }
         } while (encontrado == -1 && continuar.equals("s"));
 
@@ -240,8 +241,9 @@ public class Main {
             encontrado = control.buscarCuenta(numeroCuenta);
 
             if (encontrado != -1) {
-                out.println("Esa cuenta ya existe  |  ¿Desea continuar con el registro? s/n");
+                out.print("\nEsa cuenta ya existe  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
+                out.println();
             }
         } while (encontrado == -1 && continuar.equals("s"));
 
@@ -253,9 +255,9 @@ public class Main {
         registrado = 1;
 
         if (registrado == 1) {
-            System.out.println("Su cuenta se registró exitosamente");
+            System.out.println("\nSu cuenta se registró exitosamente\n");
         } else {
-            System.out.println("No se pudo registrar la cuenta");
+            System.out.println("\nNo se pudo registrar la cuenta\n");
         }
     }
 
@@ -274,8 +276,9 @@ public class Main {
             encontrado = control.buscarCliente(identificacion);
 
             if (encontrado == -1) {
-                out.println("Ese cliente no está registrado  |  ¿Desea continuar con el registro? s/n");
+                out.print("\nEse cliente no está registrado  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
+                out.println();
             }
         } while (encontrado == -1 && continuar.equals("s"));
 
@@ -296,7 +299,7 @@ public class Main {
             encontrado = control.buscarCuenta(numeroCuenta);
 
             if (encontrado != -1) {
-                out.println("Esa cuenta ya existe  |  ¿Desea continuar con el registro? s/n");
+                out.print("\nEsa cuenta ya existe  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
             }
             
@@ -310,9 +313,9 @@ public class Main {
         registrado = 1;
 
         if (registrado == 1) {
-            System.out.println("Su cuenta se registró exitosamente");
+            System.out.println("\nSu cuenta se registró exitosamente\n");
         } else {
-            System.out.println("No se pudo registrar la cuenta");
+            System.out.println("\nNo se pudo registrar la cuenta\n");
         }
     }
 
@@ -333,8 +336,9 @@ public class Main {
             encontrado = control.buscarCliente(identificacion);
 
             if (encontrado == -1) {
-                out.println("Ese cliente no está registrado  |  ¿Desea continuar con el registro? s/n");
+                out.println("\nEse cliente no está registrado  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
+                out.println();
             }
             
         } while (encontrado == -1 && continuar.equals("s"));
@@ -353,7 +357,7 @@ public class Main {
             encontrado = control.buscarCuenta(numero);
             
             if (encontrado == -1) {
-                out.println("Esa cuenta no existe  |  ¿Desea continuar con el registro? s/n");
+                out.print("\nEsa cuenta no existe  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
             }
             
@@ -376,8 +380,9 @@ public class Main {
             encontrado = control.buscarCuenta(numeroCuenta);
             
             if (encontrado != -1) {
-                out.println("Esa cuenta ya existe  |  ¿Desea continuar con el registro? s/n");
+                out.print("\nEsa cuenta ya existe  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
+                out.println();
             }
             
         } while (encontrado != -1 && continuar.equals("s"));
@@ -390,9 +395,9 @@ public class Main {
         registrado = 1;
 
         if (registrado == 1) {
-            System.out.println("Su cuenta se registró exitosamente");
+            System.out.println("\nSu cuenta se registró exitosamente\n");
         } else {
-            System.out.println("No se pudo registrar la cuenta");
+            System.out.println("\nNo se pudo registrar la cuenta\n");
         }
     }
     
