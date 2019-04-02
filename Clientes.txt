@@ -3,3 +3,4 @@ Junior,987654321,Desamparados
 Krause,123456789,Aserri
 Jose,372643528,Cartago
 Junior,117230683,Desamparados
+Ricardo,120913,desampa

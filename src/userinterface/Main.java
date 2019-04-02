@@ -420,52 +420,43 @@ public class Main {
         double monto;
         
         String numero;
-        int encontrado = 0;
 
-        do {
     out.print("Digite el número de cuenta a la cual desea depositar: ");
             numero = in.readLine();
 
-            encontrado = control.buscarCuenta(numero);
+            int encontrado = control.buscarCuenta(numero);
 
             if (encontrado == -1) {
-                out.print("\nEsa cuenta no existe ");
-            }else{  
+                out.println("\nEsa cuenta no existe ");
+            }else if(encontrado != -1){  
             out.print("Digite cuanto desea depositar: ");
              monto = Double.parseDouble(in.readLine());
-           control.enviarDeposito(numero, monto);}
+            control.enviarDeposito(numero, monto);
+            out.println("Deposito efectuado");
+     }
             
-            out.print("Deposito efectuado");
-
-        } while (encontrado == -1);
-
-
-        
     }
      
     public static void retirarCuenta() throws IOException {
         double monto;
         
         String numero;
-        int encontrado = 0;
     
 
-        do {
     out.print("Digite el número de cuenta a la cual desea retirar: ");
             numero = in.readLine();
 
-            encontrado = control.buscarCuenta(numero);
+            int encontrado = control.buscarCuenta(numero);
 
             if (encontrado == -1) {
                 out.print("\nEsa cuenta no existe ");
-            }else{  
+            }else {  
             out.print("Digite cuanto desea depositar: ");
              monto = Double.parseDouble(in.readLine());
-           control.enviarRetiro(numero,monto);}
+           control.enviarRetiro(numero,monto);
             
             out.print("Retiro efectuado");
-
-        } while (encontrado == -1);
+            }
         
     }
 
