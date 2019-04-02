@@ -2,5 +2,12 @@
 Junior,987654321,Desamparados
 Krause,123456789,Aserri
 Jose,372643528,Cartago
+<<<<<<< HEAD
 Junior,117230683,Desamparados
+<<<<<<< HEAD
 Ricardo,120913,desampa
+=======
+=======
+Junior,117230683,Desamparados
+>>>>>>> 492229fe220e37125eb2faa7fc7942ddae0c147a
+>>>>>>> 8352f1dbcb0985144aa2c377f797a45c92dc3ebe

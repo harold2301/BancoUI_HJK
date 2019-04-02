@@ -1,8 +1,7 @@
 package userinterface;
 
-import baselayer.Cuenta;
 import java.io.*;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Scanner;
 import transferlayer.Controller;
 
@@ -16,6 +15,11 @@ public class Main {
     public static Controller control = new Controller();
 
     public static void main(String args[]) throws IOException {
+        
+        String [] cuentasProgra;
+        cuentasProgra = obtenerCuentasProgramadas();
+        retiroAutomatico(cuentasProgra);
+        
         String opc = "";
         boolean noSalir = true;
 
@@ -94,7 +98,7 @@ public class Main {
     }
 
     public static void registrarCuenta() throws IOException {
-        String tipoUsuario = "";
+        String tipoUsuario;
 
         out.println("Cuenta corriente  |  Cuenta de ahorro  |  Cuenta de ahorro programada");
         out.println("       CC         |         CA         |               CP");
@@ -185,7 +189,7 @@ public class Main {
         if (continuar.equals("n")) {
             return;
         }
-        
+
         control.enviarCliente(nombre, cedula, direccion, numeroCuenta, saldoInicial, tipo);
 
         out.println("\nEl cliente se registró correctamente\n");
@@ -311,8 +315,10 @@ public class Main {
         String identificacion = "";
         String numero;
         String numeroCuenta;
+        LocalDate fechaCreacion = LocalDate.now();
         int encontrado = 0;
         String continuar = "";
+//        System.out.println(fechaCreacion);
 
         do {
 
@@ -379,22 +385,22 @@ public class Main {
 
         System.out.println("\nSu cuenta se registró exitosamente\n");
     }
-    
+
     public static void listarClientes() {
         String[] lista = control.listaClientes();
-        
+
         for (String info : lista) {
             out.println(info);
             out.println();
         }
     }
-    
+
     public static void listarClienteEsp() throws IOException {
-        
+
         String identificacion = "";
         String continuar = "";
         int encontrado;
-        
+
         do {
             System.out.print("Ingrese la identificación del cliente: ");
             identificacion = in.readLine();
@@ -407,21 +413,29 @@ public class Main {
                 out.println();
             }
         } while (encontrado == -1 && continuar.equals("s"));
-        
+
         if (continuar.equals("n")) {
             return;
         }
-        
+
         String cliente = "\n" + control.mostrarCliente(identificacion) + "\n"; // Contiene la información del cliente
         out.println(cliente);
     }
 
-     public static void depositarCuenta() throws IOException {
+    public static String[] obtenerCuentasProgramadas(){
+       String [] cuentas = null; 
+        return cuentas;
+    }
+    public static void retiroAutomatico(String[] cuentas) {
+
+    }
+
+    public static void depositarCuenta() throws IOException {
         double monto;
-        
+
         String numero;
 
-    out.print("Digite el número de cuenta a la cual desea depositar: ");
+            out.print("Digite el número de cuenta a la cual desea depositar: ");
             numero = in.readLine();
 
             int encontrado = control.buscarCuenta(numero);
@@ -432,18 +446,17 @@ public class Main {
             out.print("Digite cuanto desea depositar: ");
              monto = Double.parseDouble(in.readLine());
             control.enviarDeposito(numero, monto);
-            out.println("Deposito efectuado");
+            out.print("Deposito efectuado");
      }
             
     }
-     
+
     public static void retirarCuenta() throws IOException {
         double monto;
-        
+
         String numero;
     
-
-    out.print("Digite el número de cuenta a la cual desea retirar: ");
+            out.print("Digite el número de cuenta a la cual desea retirar: ");
             numero = in.readLine();
 
             int encontrado = control.buscarCuenta(numero);
@@ -451,14 +464,12 @@ public class Main {
             if (encontrado == -1) {
                 out.print("\nEsa cuenta no existe ");
             }else {  
-            out.print("Digite cuanto desea depositar: ");
+            out.print("Digite cuanto desea retirar: ");
              monto = Double.parseDouble(in.readLine());
            control.enviarRetiro(numero,monto);
             
             out.print("Retiro efectuado");
             }
-        
     }
-
 }
 
