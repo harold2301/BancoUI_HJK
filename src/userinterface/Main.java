@@ -2,6 +2,7 @@ package userinterface;
 
 import baselayer.Cuenta;
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import transferlayer.Controller;
@@ -16,6 +17,8 @@ public class Main {
     public static Controller control = new Controller();
 
     public static void main(String args[]) throws IOException {
+        
+        retiroAutomatico();
         String opc = "";
         boolean noSalir = true;
 
@@ -97,7 +100,7 @@ public class Main {
     }
 
     public static void registrarCuenta() throws IOException {
-        String tipoUsuario = "";
+        String tipoUsuario;
 
         out.println("Cuenta corriente  |  Cuenta de ahorro  |  Cuenta de ahorro programada");
         out.println("       CC         |         CA         |               CP");
@@ -314,8 +317,10 @@ public class Main {
         String identificacion = "";
         String numero;
         String numeroCuenta;
+        LocalDate fechaCreacion = LocalDate.now();
         int encontrado = 0;
         String continuar = "";
+//        System.out.println(fechaCreacion);
 
         do {
 
@@ -378,7 +383,7 @@ public class Main {
             return;
         }
 
-        control.enviarCuentaProgramada(numero, numeroCuenta);
+        control.enviarCuentaProgramada(numero, numeroCuenta, fechaCreacion);
 
         System.out.println("\nSu cuenta se registró exitosamente\n");
     }
@@ -419,4 +424,7 @@ public class Main {
         out.println(cliente);
     }
 
+    public static void retiroAutomatico(){
+        
+    }
 }
