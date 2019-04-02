@@ -12,6 +12,7 @@ public class Main {
             new InputStreamReader(System.in));
     static PrintStream out = (System.out);
     static Scanner sc = new Scanner(System.in);
+
     public static Controller control = new Controller();
 
     public static void main(String args[]) throws IOException {
@@ -27,10 +28,15 @@ public class Main {
     }
 
     public static void mostrarMenu() {
-        out.println("+=======================+");
-        out.println("|  1. Registrar cuenta  |");
-        out.println("|  2. Registrar cliente |");
-        out.println("+=======================+");
+        out.println("+========================+");
+        out.println("|  1. Registrar cliente  |");
+        out.println("|  2. Registrar cuenta   |");
+        out.println("|  3. Depositar          |");
+        out.println("|  4. Retirar            |");
+        out.println("|  5. Listar clientes    |");
+        out.println("|  6. Listar un cliente  |");
+        out.println("|  7. Salir              |");
+        out.println("+========================+");
         out.println();
     }
 
@@ -44,18 +50,18 @@ public class Main {
         return opcion;
     }
 
-    ;
-
     public static boolean ejecutarAccion(String popc) throws IOException {
         boolean noSalir = true;
 
         switch (popc) {
             case "1":
-                registrarCuenta();
+                // Función que registra a un nuevo cliente
+                registrarCliente();
                 break;
 
             case "2":
-                registrarCliente();
+                // Función que registra una nueva cuenta a un cliente ya registrado
+                registrarCuenta();
                 break;
 
             case "3":
@@ -67,19 +73,18 @@ public class Main {
                 break;
 
             case "5":
-                // Función de listar clientes
+                // Función que lista a todos los clientes
+                listarClientes();
                 break;
 
             case "6":
-                // Función de listar un cliente
+                // Función que lista un cliente
+                listarClienteEsp();
                 break;
 
             case "7":
                 out.println("Hasta luego...");
                 noSalir = false;
-                break;
-
-            case "8":
                 break;
 
             default:
@@ -150,7 +155,7 @@ public class Main {
 
         } while (encontrado != -1 && continuar.equals("s"));
 
-        if (continuar.equals("n")) {
+        if (continuar.equals("n")) {  // Si la respuesta de continuar es no la función termina con la palabra return
             return;
         }
 
@@ -164,9 +169,9 @@ public class Main {
             System.out.print("\nSeleccione una opción: ");
             tipo = sc.next();
             System.out.println();
+
             System.out.print("Ingrese el número de cuenta: ");
             numeroCuenta = sc.next();
-
             System.out.print("Ingrese el saldo inicial de la cuenta: ");
             saldoInicial = sc.nextDouble();
 
@@ -183,24 +188,10 @@ public class Main {
         if (continuar.equals("n")) {
             return;
         }
+        
+        control.enviarCliente(nombre, cedula, direccion, numeroCuenta, saldoInicial, tipo);
 
-        if (tipo == null) {
-            System.out.println("Opción invalida");
-        } else {
-            switch (tipo) {
-                case "CC":
-                    control.enviarClienteCorriente(nombre, cedula, direccion, numeroCuenta, saldoInicial);
-                    out.println("\nEl cliente se registró correctamente\n");
-                    break;
-                case "CA":
-                    control.enviarClienteAhorro(nombre, cedula, direccion, numeroCuenta, saldoInicial);
-                    out.println("\nEl cliente se registró correctamente\n");
-                    break;
-                default:
-                    System.out.println("Opción invalida");
-                    break;
-            }
-        }
+        out.println("\nEl cliente se registró correctamente\n");
     }
 
     public static void registrarCuentaCorriente() throws IOException {
@@ -237,7 +228,7 @@ public class Main {
             numeroCuenta = sc.next();
             System.out.print("Ingrese el saldo inicial de la nueva cuenta: ");
             saldoInicial = sc.nextDouble();
-            
+
             encontrado = control.buscarCuenta(numeroCuenta);
 
             if (encontrado != -1) {
@@ -245,13 +236,13 @@ public class Main {
                 continuar = in.readLine();
                 out.println();
             }
-        } while (encontrado == -1 && continuar.equals("s"));
+        } while (encontrado != -1 && continuar.equals("s"));
 
         if (continuar.equals("n")) {
             return;
         }
 
-        control.enviarCuentaCorriente(identificacion, numeroCuenta, saldoInicial);
+        control.enviarCuenta(identificacion, numeroCuenta, saldoInicial, "CC");
         registrado = 1;
 
         if (registrado == 1) {
@@ -290,26 +281,26 @@ public class Main {
         continuar = "";
 
         do {
-            
+
             System.out.print("Ingrese el número de la nueva cuenta de ahorro: ");
             numeroCuenta = sc.next();
             System.out.print("Ingrese el saldo inicial de la nueva cuenta de ahorra: ");
             saldoInicial = sc.nextDouble();
-            
+
             encontrado = control.buscarCuenta(numeroCuenta);
 
             if (encontrado != -1) {
                 out.print("\nEsa cuenta ya existe  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
             }
-            
+
         } while (encontrado != -1 && continuar.equals("s"));
 
         if (continuar.equals("n")) {
             return;
         }
 
-        control.enviarCuentaAhorro(identificacion, numeroCuenta, saldoInicial);
+        control.enviarCuenta(identificacion, numeroCuenta, saldoInicial, "CA");
         registrado = 1;
 
         if (registrado == 1) {
@@ -323,13 +314,11 @@ public class Main {
         String identificacion = "";
         String numero;
         String numeroCuenta;
-        double saldo;
         int encontrado = 0;
         String continuar = "";
-        int registrado = 0;
 
         do {
-            
+
             out.print("Ingrese su identificacion: ");
             identificacion = in.readLine();
 
@@ -340,7 +329,7 @@ public class Main {
                 continuar = in.readLine();
                 out.println();
             }
-            
+
         } while (encontrado == -1 && continuar.equals("s"));
 
         if (continuar.equals("n")) {
@@ -349,56 +338,85 @@ public class Main {
 
         encontrado = 0;
         continuar = "";
-        
+
         do {
             out.print("Ingrese el número de su cuenta corriente: ");
             numero = in.readLine();
-            
+
             encontrado = control.buscarCuenta(numero);
-            
+
             if (encontrado == -1) {
                 out.print("\nEsa cuenta no existe  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
             }
-            
+
         } while (encontrado == -1 && continuar.equals("s"));
-        
+
         if (continuar.equals("n")) {
             return;
         }
-        
+
         encontrado = 0;
         continuar = "";
 
         do {
-            
+
             out.print("Ingrese el número de la cuenta de ahorro programada: ");
             numeroCuenta = in.readLine();
-            out.print("Ingrese el monto que quiere ahorrar mensualmente: ");
-            saldo = Double.parseDouble(in.readLine());
 
             encontrado = control.buscarCuenta(numeroCuenta);
-            
+
             if (encontrado != -1) {
                 out.print("\nEsa cuenta ya existe  |  ¿Desea continuar con el registro? s/n: ");
                 continuar = in.readLine();
                 out.println();
             }
-            
+
         } while (encontrado != -1 && continuar.equals("s"));
 
         if (continuar.equals("n")) {
             return;
         }
 
-        control.enviarCuentaProgramada(identificacion, numero, numeroCuenta, saldo);
-        registrado = 1;
+        control.enviarCuentaProgramada(numero, numeroCuenta);
 
-        if (registrado == 1) {
-            System.out.println("\nSu cuenta se registró exitosamente\n");
-        } else {
-            System.out.println("\nNo se pudo registrar la cuenta\n");
+        System.out.println("\nSu cuenta se registró exitosamente\n");
+    }
+    
+    public static void listarClientes() {
+        String[] lista = control.listaClientes();
+        
+        for (String info : lista) {
+            out.println(info);
+            out.println();
         }
     }
     
+    public static void listarClienteEsp() throws IOException {
+        
+        String identificacion = "";
+        String continuar = "";
+        int encontrado;
+        
+        do {
+            System.out.print("Ingrese la identificación del cliente: ");
+            identificacion = in.readLine();
+
+            encontrado = control.buscarCliente(identificacion);
+
+            if (encontrado == -1) {
+                out.print("\nEse cliente no está registrado  |  ¿Desea buscar otro cliente? s/n: ");
+                continuar = in.readLine();
+                out.println();
+            }
+        } while (encontrado == -1 && continuar.equals("s"));
+        
+        if (continuar.equals("n")) {
+            return;
+        }
+        
+        String cliente = "\n" + control.mostrarCliente(identificacion) + "\n"; // Contiene la información del cliente
+        out.println(cliente);
+    }
+
 }
