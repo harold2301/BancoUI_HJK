@@ -15,11 +15,11 @@ public class Main {
     public static Controller control = new Controller();
 
     public static void main(String args[]) throws IOException {
-        
-        String [] cuentasProgra;
-        cuentasProgra = obtenerCuentasProgramadas();
-        retiroAutomatico(cuentasProgra);
-        
+//
+//        String[] cuentasProgra;
+//        cuentasProgra = obtenerCuentasProgramadas();
+//        retiroAutomatico(cuentasProgra);
+
         String opc = "";
         boolean noSalir = true;
 
@@ -381,7 +381,7 @@ public class Main {
             return;
         }
 
-        control.enviarCuentaProgramada(numero, numeroCuenta);
+        control.enviarCuentaProgramada(numero, numeroCuenta, fechaCreacion);
 
         System.out.println("\nSu cuenta se registró exitosamente\n");
     }
@@ -422,10 +422,11 @@ public class Main {
         out.println(cliente);
     }
 
-    public static String[] obtenerCuentasProgramadas(){
-       String [] cuentas = null; 
+    public static String[] obtenerCuentasProgramadas() {
+        String[] cuentas = null;
         return cuentas;
     }
+
     public static void retiroAutomatico(String[] cuentas) {
 
     }
@@ -435,41 +436,39 @@ public class Main {
 
         String numero;
 
-            out.print("Digite el número de cuenta a la cual desea depositar: ");
-            numero = in.readLine();
+        out.print("Digite el número de cuenta a la cual desea depositar: ");
+        numero = in.readLine();
 
-            int encontrado = control.buscarCuenta(numero);
+        int encontrado = control.buscarCuenta(numero);
 
-            if (encontrado == -1) {
-                out.println("\nEsa cuenta no existe ");
-            }else if(encontrado != -1){  
+        if (encontrado == -1) {
+            out.println("\nEsa cuenta no existe ");
+        } else if (encontrado != -1) {
             out.print("Digite cuanto desea depositar: ");
-             monto = Double.parseDouble(in.readLine());
+            monto = Double.parseDouble(in.readLine());
             control.enviarDeposito(numero, monto);
-            out.print("Deposito efectuado");
-     }
-            
+            out.println("\nDeposito exitoso\n");
+        }
+
     }
 
     public static void retirarCuenta() throws IOException {
         double monto;
-
         String numero;
-    
-            out.print("Digite el número de cuenta a la cual desea retirar: ");
-            numero = in.readLine();
 
-            int encontrado = control.buscarCuenta(numero);
+        out.print("Digite el número de cuenta a la cual desea retirar: ");
+        numero = in.readLine();
 
-            if (encontrado == -1) {
-                out.print("\nEsa cuenta no existe ");
-            }else {  
+        int encontrado = control.buscarCuenta(numero);
+
+        if (encontrado == -1) {
+            out.print("\nEsa cuenta no existe ");
+        } else {
             out.print("Digite cuanto desea retirar: ");
-             monto = Double.parseDouble(in.readLine());
-           control.enviarRetiro(numero,monto);
-            
-            out.print("Retiro efectuado");
-            }
+            monto = Double.parseDouble(in.readLine());
+            control.enviarRetiro(numero, monto);
+
+            out.println("\nRetiro exitoso\n");
+        }
     }
 }
-
